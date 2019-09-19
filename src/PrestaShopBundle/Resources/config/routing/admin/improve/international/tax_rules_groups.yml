@@ -1,0 +1,82 @@
+admin_tax_rules_groups_index:
+  path: /
+  methods: [GET]
+  defaults:
+    _controller: PrestaShopBundle:Admin\Improve\International\TaxRulesGroup:index
+    _legacy_controller: AdminTaxRulesGroup
+#    _legacy_link: AdminTaxRulesGroup
+
+admin_tax_rules_groups_create:
+  path: /new
+  methods: [GET, POST]
+  defaults:
+    _controller: PrestaShopBundle:Admin\Improve\International\TaxRulesGroup:create
+    _legacy_controller: AdminTaxRulesGroup
+    _legacy_link: AdminTaxRulesGroup:addtax_rules_group
+
+admin_tax_rules_groups_edit:
+  path: /{taxRulesGroupId}/edit
+  methods: [GET, POST]
+  defaults:
+    _controller: PrestaShopBundle:Admin\Improve\International\TaxRulesGroup:edit
+    _legacy_controller: AdminTaxRulesGroup
+    _legacy_link: AdminTaxRulesGroup:updatetax_rules_group
+    _legacy_parameters:
+      id_tax_rules_group: taxRulesGroupId
+  requirements:
+    taxRulesGroupId: \d+
+
+admin_tax_rules_create:
+  path: /{taxRulesGroupId}/tax-rules/new
+  methods: [POST]
+  defaults:
+    _controller: PrestaShopBundle:Admin\Improve\International\TaxRulesGroup:createTaxRule
+    _legacy_controller: AdminTaxRulesGroup
+    _legacy_link: AdminTaxRulesGroup:addtax_rules_group
+  requirements:
+    taxRulesGroupId: \d+
+
+admin_tax_rules_load:
+  path: /tax-rules/{taxRuleId}/edit
+  methods: [GET]
+  condition: "context.getMethod() in ['GET'] and request.isXmlHttpRequest()"
+  defaults:
+    _controller: PrestaShopBundle:Admin\Improve\International\TaxRulesGroup:loadTaxRule
+    _legacy_controller: AdminTaxRulesGroup
+    _legacy_link: AdminTaxRulesGroup:updateTaxRule
+    _legacy_parameters:
+      id_tax_rule: taxRuleId
+  requirements:
+    taxRuleId: \d+
+
+admin_tax_rules_edit:
+  path: /tax-rules/{taxRuleId}/edit
+  methods: [POST]
+  defaults:
+    _controller: PrestaShopBundle:Admin\Improve\International\TaxRulesGroup:editTaxRule
+    _legacy_controller: AdminTaxRulesGroup
+    _legacy_link: AdminTaxRulesGroup:updateTaxRule
+    _legacy_parameters:
+      id_tax_rule: taxRuleId
+  requirements:
+    taxRuleId: \d+
+
+admin_tax_rules_delete:
+  path: /tax-rules/{taxRuleId}/delete
+  methods: POST
+  defaults:
+    _controller: PrestaShopBundle:Admin\Improve\International\TaxRulesGroup:deleteTaxRule
+    _legacy_controller: AdminTaxRulesGroup
+    _legacy_link: AdminTaxRulesGroup:deletetax_rule
+    _legacy_parameters:
+      id_tax_rule: taxRuleId
+  requirements:
+    taxRuleId: \d+
+
+admin_tax_rules_bulk_delete:
+  path: /{taxRulesGroupId}/tax-rules/bulk-delete
+  methods: [POST]
+  defaults:
+    _controller: PrestaShopBundle:Admin\Improve\International\TaxRulesGroup:bulkDeleteTaxRules
+    _legacy_controller: AdminTaxRulesGroup
+    _legacy_link: AdminTaxRulesGroup:submitBulkdeletetax_rule
