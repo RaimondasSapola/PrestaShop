@@ -22,13 +22,11 @@
  * @license   https://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
  * International Registered Trademark & Property of PrestaShop SA
  */
-const fs = require('fs');
 const path = require('path');
 const webpack = require('webpack');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const cssExtractedFileName = 'theme';
 
 module.exports = {
   externals: {
@@ -49,6 +47,7 @@ module.exports = {
     cms_page: './js/pages/cms-page',
     cms_page_form: './js/pages/cms-page/form',
     contacts: './js/pages/contacts',
+    country_form: './js/pages/country/form.js',
     credit_slip: './js/pages/credit-slip',
     currency: './js/pages/currency',
     currency_form: './js/pages/currency/form',
@@ -127,10 +126,11 @@ module.exports = {
           loader: 'babel-loader',
           options: {
             presets: [
-              ['es2015', {modules: false}],
-              ['env', {'useBuiltIns': 'usage'}]
+              ['env', {useBuiltIns: 'usage', modules: false}],
             ],
-            'plugins': ['transform-runtime']
+            plugins: [
+              'transform-object-rest-spread',
+            ],
           },
         }],
       },
@@ -230,7 +230,7 @@ module.exports = {
     new ExtractTextPlugin('theme.css'),
     new CleanWebpackPlugin(['public'], {
       root: path.resolve(__dirname, '../'),
-      exclude: ['theme.rtlfix']
+      exclude: ['theme.rtlfix'],
     }),
     new webpack.ProvidePlugin({
       moment: 'moment', // needed for bootstrap datetime picker
@@ -238,7 +238,7 @@ module.exports = {
       jQuery: 'jquery',
     }),
     new CopyPlugin([
-      { from: 'static' },
-    ])
+      {from: 'static'},
+    ]),
   ],
 };

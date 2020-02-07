@@ -66,7 +66,7 @@ module.exports = class BOBasePage extends CommonPage {
     // Design
     this.designParentLink = '#subtab-AdminParentThemes';
     // Email theme
-    this.emailThemeLink = '#subtab-AdminMailThemeParent';
+    this.emailThemeLink = '#subtab-AdminParentMailTheme';
     // Pages
     this.pagesLink = '#subtab-AdminCmsContent';
     // Link widget
@@ -83,6 +83,8 @@ module.exports = class BOBasePage extends CommonPage {
     this.shopParametersParentLink = '#subtab-ShopParameters';
     // General
     this.shopParametersGeneralLink = '#subtab-AdminParentPreferences';
+    // Product Settings
+    this.productSettingsLink = '#subtab-AdminPPreferences';
     // Contact
     this.contactLink = '#subtab-AdminParentStores';
     // traffic and SEO
